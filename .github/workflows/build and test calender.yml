@@ -53,6 +53,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            set -e
             sudo docker pull mariasherin/calendermarvel:latest
             sudo docker rm -f calendermarvel || true
             sudo docker run -d \
@@ -60,4 +61,8 @@ jobs:
               --restart unless-stopped \
               -p 9003:3000 \
               mariasherin/calendermarvel:latest
-            sudo docker ps
+            sleep 3
+            sudo docker ps -a
+            sudo docker port calendermarvel
+            sudo docker logs --tail 30 calendermarvel
+            curl -I --max-time 10 http://localhost:9003
