@@ -135,6 +135,9 @@ app.delete("/api/events/:id", (req, res) => {
         });
     }
 });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "calender.html"));
+});
 
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
