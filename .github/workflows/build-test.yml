@@ -1,0 +1,23 @@
+
+name: Calendar Build and Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Node.js
+        run: node --version
+
+      - name: Check project files
+        run: ls -la
